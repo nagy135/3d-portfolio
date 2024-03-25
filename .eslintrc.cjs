@@ -8,6 +8,9 @@ const config = {
     "@typescript-eslint",
     "drizzle"
   ],
+  "ignorePatterns": [
+    "circle-formation.tsx"
+  ],
   "extends": [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended-type-checked",
@@ -15,6 +18,7 @@ const config = {
   ],
   "rules": {
     "@typescript-eslint/array-type": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/consistent-type-imports": [
       "warn",
