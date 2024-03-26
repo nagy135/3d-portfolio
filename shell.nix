@@ -3,7 +3,7 @@ with pkgs;
 mkShell rec {
   name = "3dPortfolio";
   buildInputs = [
-    nodejs
+    bun
     figlet
     lolcat
   ];

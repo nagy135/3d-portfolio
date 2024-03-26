@@ -6,6 +6,8 @@ import { type OrbitControls } from "three/examples/jsm/controls/OrbitControls.js
 import Model from "./model";
 import CameraController from "./camera-controller";
 
+import { Text } from '@react-three/drei'
+
 interface ICircleFormation {
   content: {
     lift?: number;
@@ -82,17 +84,7 @@ const CircleFormation: FC<ICircleFormation> = ({ content }) => {
 
   useEffect(() => {
     if (!viewport) return;
-    const newVal = Math.min(
-      mapRange(
-        viewport.width,
-        8,
-        21.3,
-        VIEWPORT_SCALING.min,
-        VIEWPORT_SCALING.max
-      ),
-      0.8
-    );
-    camera.zoom = newVal;
+    camera.zoom = 1;
     camera.updateProjectionMatrix();
 
     for (let i = 0; i < content.length; i++) {
@@ -146,6 +138,12 @@ const CircleFormation: FC<ICircleFormation> = ({ content }) => {
 
         return (
           <>
+
+            <Text
+              fontWeight={550}
+              outlineColor="#19a85b" outlineWidth={0.01} color="#0b0b0b" anchorX="center" anchorY="top">
+              welcome
+            </Text>
             {content[i] && content[i]?.model !== null ? (
               <Model
                 key={`model-${i}`}

@@ -16,8 +16,8 @@ const CameraController: FC<ICameraController> = ({ onRotate, instanceRef }) => {
     controls.enableDamping = true;
     controls.dampingFactor = 0.15;
 
-    controls.minDistance = 3;
-    controls.maxDistance = 20;
+    controls.minDistance = 2;
+    controls.maxDistance = 10;
     controls.minPolarAngle = Math.PI / 2;
     controls.maxPolarAngle = Math.PI / 2;
     controls.addEventListener("change", () =>
