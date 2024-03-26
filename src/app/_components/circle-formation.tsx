@@ -6,7 +6,7 @@ import { type OrbitControls } from "three/examples/jsm/controls/OrbitControls.js
 import Model from "./model";
 import CameraController from "./camera-controller";
 
-import { Text } from '@react-three/drei'
+import { CameraControls, Text } from '@react-three/drei'
 
 interface ICircleFormation {
   content: {
@@ -94,7 +94,7 @@ const CircleFormation: FC<ICircleFormation> = ({ content }) => {
       const z = Math.cos(radians);
       setPositions((prev) => [
         ...prev,
-        { x: x * multiplier, y: 0, z: z * multiplier },
+        { x: x * multiplier, y: 0, z: z * multiplier - 1 },
       ]);
     }
   }, [content, viewport, camera]);
@@ -138,7 +138,6 @@ const CircleFormation: FC<ICircleFormation> = ({ content }) => {
 
         return (
           <>
-
             <Text
               fontWeight={550}
               outlineColor="#19a85b" outlineWidth={0.01} color="#0b0b0b" anchorX="center" anchorY="top">

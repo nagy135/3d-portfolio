@@ -14,7 +14,7 @@ const CameraController: FC<ICameraController> = ({ onRotate, instanceRef }) => {
     instanceRef.current = controls;
 
     controls.enableDamping = true;
-    controls.dampingFactor = 0.15;
+    controls.dampingFactor = 0.10;
 
     controls.minDistance = 2;
     controls.maxDistance = 10;

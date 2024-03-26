@@ -5,7 +5,7 @@ import CircleFormation from './circle-formation';
 import { extend } from '@react-three/fiber'
 import { OrbitControls, TransformControls } from 'three-stdlib'
 import { Suspense } from 'react';
-import { Cloud, Sky } from '@react-three/drei';
+import { Backdrop, Cloud, Environment, Sky, Stars } from '@react-three/drei';
 
 extend({ OrbitControls, TransformControls })
 
@@ -35,12 +35,15 @@ export function Gallery() {
             inclination={0}
             azimuth={0.25}
           />
+          <Environment preset="city" />
+
+          <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade />
 
           <Cloud
             opacity={0.5}
             speed={0.1} // Rotation speed
             segments={20} // Number of particles
-            position={[5, 8, 3]}
+            position={[5, 6, 3]}
           />
           <directionalLight intensity={1.0} position={[0, 0, 2]} />
           <directionalLight intensity={1.0} position={[0, 0, -3]} />
