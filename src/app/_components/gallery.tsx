@@ -5,7 +5,7 @@ import CircleFormation from './circle-formation';
 import { extend } from '@react-three/fiber'
 import { OrbitControls, TransformControls } from 'three-stdlib'
 import { Suspense, useRef, useState } from 'react';
-import { Cloud, Environment, RoundedBox, Sky, SpotLight, Stars } from '@react-three/drei';
+import { Environment, RoundedBox, Sky, SpotLight, Stars } from '@react-three/drei';
 import { Text } from '@react-three/drei'
 
 extend({ OrbitControls, TransformControls })
@@ -28,7 +28,7 @@ const SkyComponent = () => {
 
 		timeOffset.current += 1;
 
-		setSunPosition(prev => [x, y, prev[2] as number]);
+		setSunPosition(prev => [x, y, prev[2]!]);
 	});
 	return <Sky
 		distance={450000}
