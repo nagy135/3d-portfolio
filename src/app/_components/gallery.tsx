@@ -73,6 +73,12 @@ export function Gallery() {
                   scale: [0.03, 0.03, 0.03],
                   lift: -1,
                 },
+		{
+                  image: "images/fidget.jpg",
+		  model: "fidget.gltf",
+		  scale: [0.3, 0.3, 0.3],
+		  lift: -1,
+		},
               ]}
             />
           </Suspense>
