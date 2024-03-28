@@ -1,17 +1,42 @@
 "use client";
 
-import { Canvas, type Vector3 } from '@react-three/fiber'
+import { Canvas, useFrame, type Vector3 } from '@react-three/fiber'
 import CircleFormation from './circle-formation';
 import { extend } from '@react-three/fiber'
 import { OrbitControls, TransformControls } from 'three-stdlib'
-import { Suspense } from 'react';
-import { Cloud, Environment, RoundedBox, Sky, Stars } from '@react-three/drei';
+import { Suspense, useRef, useState } from 'react';
+import { Cloud, Environment, RoundedBox, Sky, SpotLight, Stars } from '@react-three/drei';
 import { Text } from '@react-three/drei'
 
 extend({ OrbitControls, TransformControls })
 
-const sunPosition: Vector3 = [0, 5, 12];
+const UPDATE_INTERVAL = 2 / 60;
 
+const SkyComponent = () => {
+	const [sunPosition, setSunPosition] = useState([0, 2, 0]);
+	const timeOffset = useRef<number>(1);
+	const updatedAt = useRef<number>(0);
+	useFrame(({ clock }) => {
+		const elapsedTime = clock.getElapsedTime();
+		if (updatedAt.current + UPDATE_INTERVAL > elapsedTime) return;
+		updatedAt.current = elapsedTime;
+
+		const radians = ((2 * Math.PI) / 360) * timeOffset.current;
+
+		const x = Math.sin(radians);
+		const y = Math.cos(radians);
+
+		timeOffset.current += 1;
+
+		setSunPosition(prev => [x, y, prev[2] as number]);
+	});
+	return <Sky
+		distance={450000}
+		sunPosition={sunPosition as Vector3}
+		inclination={0}
+		azimuth={0.25}
+	/>
+};
 
 export function Gallery() {
 	return (
@@ -32,27 +57,31 @@ export function Gallery() {
 						</Text>
 					}
 				>
-					<Sky
-						distance={450000}
-						sunPosition={sunPosition}
-						inclination={0}
-						azimuth={0.25}
-					/>
+					<mesh
+						position={[3, 2, 0]}
+					>
+						<SpotLight
+							distance={5}
+							angle={0.15}
+							attenuation={5}
+							anglePower={2} // Diffuse-cone anglePower (default: 5)
+						/>
+					</mesh>
+
+					<mesh
+						position={[-3, 2, 0]}
+					>
+						<SpotLight
+							distance={5}
+							angle={0.15}
+							attenuation={5}
+							anglePower={2} // Diffuse-cone anglePower (default: 5)
+						/>
+					</mesh>
+
 					<Environment preset="city" />
+					<SkyComponent />
 
-
-					<Cloud
-						opacity={0.5}
-						speed={0.1} // Rotation speed
-						segments={20} // Number of particles
-						position={[3, 6, 3]}
-					/>
-					<Cloud
-						opacity={0.5}
-						speed={0.1} // Rotation speed
-						segments={20} // Number of particles
-						position={[-3, 6, -3]}
-					/>
 					<Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade />
 					<directionalLight castShadow intensity={1.0} position={[0, 0, 2]} />
 					<directionalLight castShadow intensity={1.0} position={[0, 0, -3]} />
@@ -65,7 +94,7 @@ export function Gallery() {
 							creaseAngle={0.4}
 							radius={0.4}
 							args={[10, 1, 10]}>
-							<meshStandardMaterial color={"#cccccc"} attach="material" />
+							<meshStandardMaterial color={"#0b0b0b"} attach="material" />
 						</RoundedBox>
 					</mesh>
 
