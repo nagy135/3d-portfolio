@@ -149,6 +149,7 @@ const CircleFormation: FC<ICircleFormation> = ({ content }) => {
 						</mesh>
 						<mesh
 							position={[0, -0.7, -0.24]}
+							castShadow
 						>
 							<RoundedBox
 								args={[5, 1.5, 0.5]} // Width, height, depth. Default is [1, 1, 1]
